@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float minYAngle, maxYAngle;
     float currentSensitivity, yRotate, xRotate;
 
+    // instance
+    public static PlayerController instance;
+    private void Awake() => instance = this;
+
     // Update is called once per frame
     void Update()
     {
@@ -70,9 +74,6 @@ public class PlayerController : MonoBehaviour
         // add in our rotate mods if we have any
         float finalxRotate = xRotate;
         float finalyRotate = yRotate;
-
-        Mathf.SmoothStep(xRotate, finalxRotate, 5 * Time.fixedDeltaTime);
-        Mathf.SmoothStep(yRotate, finalyRotate, 5 * Time.fixedDeltaTime);
 
         // apply it to our head
         playerHead.eulerAngles = new Vector3(finalyRotate, finalxRotate, 0f);
